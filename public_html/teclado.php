@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<head>
+<meta charset='utf-8' />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aprendendo Allegro 5 - Teclado</title>
+
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="script/popups.js"></script>
+<script src="script/buttons.js"></script>
+<link rel="stylesheet" href="css/stylesheet.css"/>
+<link rel="stylesheet" href="css/popups.css"/>
+<link rel='stylesheet' href='css/responsive.css'/> 
+<link rel='stylesheet' href='css/buttons.css'/> 
+
+</head>
+<body>
+<?php include_once("functions.php"); ?>
+<?php include_once("side_menu.php"); ?>
+
+<div class='page-wrapper'>
+	<div class="container">
+		<div class='col-m-12'>
+			<h1>Utilizando o teclado</h1>
+			
+			<p>Nesta lição veremos como utilizar a entrada do teclado nos programas. Para isso, usaremos os eventos do allegro. Como já de costume das lições anteriores, o código é mostrado e entrão explicado por partes. Caso alguma parte não tenha sida explicada, provavelmente é porque ela já tenha sido explicada antes, então recomendo voltar algumas lições para aprender bem as partes anteriores.</p>
+			
+			<p>Este programa abre uma janela, e fica esperando o usuário digitar uma tecla. Caso ele digite as teclas relativas às setas para cima, baixo, esquerda ou direita, um texto colorido aparece na tela enquanto a tecla está sendo pressionada. Caso a tecla ESC for pressionada, ou o usuário clicar para fechar a janela, o programa é encerrado.</p>
+			
+			<div class='imagem'>
+				<img src='img/exemplo-teclado.gif' >
+				<label>Setas para a cima, baixo, esquerda e direita sendo pressionadas</label>
+			</div>
+			
+			<pre class='prettyprint linenums' id='codigo'><?php printfile('ccode/teclado.c'); ?></pre>
+					
+			<p>Na <span class='linha' data-ln='19'>linha 19</span> declaramos a função inicializar(). Esta função será utilizada lá dentro do main(), e ela retorna 0 caso alguma das diversas funções de inicialização do programa falhar, ou 1 caso chegue ao fim com sucesso. Na <span class='linha' data-ln='77'>linha 77</span> o main verifica as inicializações através desta função. Este processo foi feito por questões de organização de código.</p>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/al_install_keyboard'>al_install_keyboard()</a></h2>
+			<p>Na <span class='linha' data-ln='38'>linha 38</span> chamamos a função al_install_keyboard(), que permite a captura das teclas digitadas no teclado através de eventos.</p>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/al_get_keyboard_event_source'>al_get_keyboard_event_source()</a></h2>
+			<p>Na <span class='linha' data-ln='66'>linha 66</span> chamamos a função al_get_keyboard_event_source() receber os eventos do teclado, e usamos o mesmo na função al_register_event_source() para registrar os eventos vindos do teclado na fila de eventos.</p>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/ALLEGRO_EVENT'>ALLEGRO_EVENT_KEY_DOWN</a></h2>
+			<p>Na <span class='linha' data-ln='90'>linha 90</span> testamos se o tipo de evento capturado é o ALLEGRO_EVENT_KEY_DOWN, que é o tipo de evento disparado quando é detectado o ato pressionar de uma tecla.</p>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/keyboard.html'>.keyboard.keycode</a></h2>
+			<p>Na <span class='linha' data-ln='92'>linha 92</span> fazemos um switch para verificar o valor do campo .keyboard.keycode. Como já foi dito anteriormente, a variável ALLEGRO_EVENT é uma struct com diversos campos. E o campo .keyboard.keycode, em caso de disparo de um evento relativo a uma tecla, possuirá um código referente a qual tecla foi pressionada. Consulte a referência para saber sobre os possíveis keycodes.</p>
+			
+			<p>Nas linhas <span class='linha' data-ln='94'>94</span>, <span class='linha' data-ln='98'>98</span>, <span class='linha' data-ln='102'>102</span> e <span class='linha' data-ln='106'>106</span> verificamos se as teclas pressionadas são as setas para cima, baixo, esquerda e direita, respectivamente. Em cada caso colocamos um valor arbitrário na variável <b>tecla</b>, que será verificado mais adiante.</p>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/ALLEGRO_EVENT'>ALLEGRO_EVENT_KEY_UP</a></h2>
+			<p>Na <span class='linha' data-ln='116'>linha 116</span> verificamos se o evento disparado foi ALLEGRO_EVENT_KEY_UP, que é o evento relacionado ao soltar uma tecla. Em caso verdadeiro, colocamos o valor <b>tecla=5</b>. Este valor vai servir para na parte do código que mostra o texto, o programa saber que é para limpar o conteúdo da tela.</p>
+			
+			<p>Na <span class='linha' data-ln='120'>linha 120</span> testamos se o usuário clico no botão de fechar a janela, se sim, colocamos a flag <b>sair=1</b>. Isto fará com que o programa feche na próxima iteração do loop principal (<span class='linha' data-ln='83'>linha 83</span>).</p>
+			
+			<p>Na <span class='linha' data-ln='126'>linha 126</span> testamos se <b>tecla!=0</b>. Caso seja, significa que desde a última iteração do loop principal, alguma tecla foi pressionada ou solta. Isto significa que temos que atualizar a tela.</p>
+						
+			<p>Começamos limpando a tela na <span class='linha' data-ln='127'>linha 127</span>, para então verificar com o switch da <span class='linha' data-ln='130'>linha 130</span> o valor da <b>tecla</b>. Caso os valores sejam de 1 a 4 significa que o usuário pressionou alguma seta, conforme visto acima. Neste caso, usamos a função <a target='_blank' href='https://www.allegro.cc/manual/5/al_draw_text()'>al_draw_text</a> para escrever a mensagem na tela. Cada mensagem será de uma cor diferente, todas no centro da tela, com a fonte definida na <span class='linha' data-ln='51'>linha 51</span>.</p>
+			
+			<p>Como no switch não temos nenhum caso para <b>tecla==5</b> significa que o progrma apenas limpará a tela (<span class='linha' data-ln='127'>linha 127</span>) sem mostrar nenhum texto.</p>
+			
+			<p>Ao após escrever o texto, atribuímos <b>tecla=0</b> para dizer ao programa que não há mais o que atualizar, logo, na próxima vez que o programa chegar na <span class='linha' data-ln='126'>linha 126</span>, se nenhum evento de captura de tecla tiver sido disparado antes, nada mais será escrito.</p>
+			
+			<h3>Download dos arquivos</h3>
+			<ul>
+				<li><a href='ccode/arial.ttf' download>Fonte do texto</a></li>
+			</ul>
+
+			<h3>Outros links</h3>
+			<ul>
+				<li><a target='_blank' href='http://www.rafaeltoledo.net/tutorial-allegro-5-6-utilizando-o-teclado/'>Utilizando o Teclado</a></li>
+				<li><a target='_blank' href='https://wiki.allegro.cc/index.php?title=Basic_Keyboard_Example'>Basic Keyboard Example</a></li>
+				<li>Keyboard Input in Allegro 5: <a target='_blank' href='https://www.youtube.com/watch?v=WpML30zYGc0&list=PL9333715188CD7669&index=5'>Part 1</a>, <a target='_blank' href='https://www.youtube.com/watch?v=tK35sp5DYKM&list=PL9333715188CD7669&index=6'>Part 2</a></li>
+			</ul>
+		</div>
+		<div id='btn-footer'>
+			<a class="button-red" href='mouse.php'>Anterior</a>
+			<a class="button-red" href='timer.php'>Próximo</a>
+		</div>
+	</div>
+</div>
+</body>
+<script src="script/line_link.js"></script>

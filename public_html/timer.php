@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+<meta charset='utf-8' />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aprendendo Allegro 5 - Timers</title>
+
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="script/popups.js"></script>
+<script src="script/buttons.js"></script>
+<link rel="stylesheet" href="css/stylesheet.css"/>
+<link rel="stylesheet" href="css/popups.css"/>
+<link rel='stylesheet' href='css/responsive.css'/> 
+<link rel='stylesheet' href='css/buttons.css'/> 
+
+</head>
+<body>
+<?php include_once("functions.php"); ?>
+<?php include_once("side_menu.php"); ?>
+
+<div class='page-wrapper'>
+	<div class="container">
+		<div class='col-m-12'>
+			<h1>Criando temporizadores</h1>
+			
+			<p>Os timers, ou temporizadores funcionam basicamente como se fossem cronômetros com um tempo definido. A cada intervalor deste tempo, eles disparam um evento. Então podemos utilizar este evento para realizar qualquer tarefa desejada no programa.</p>
+			
+			<p>Neste exemplo, a janela fica mudando de cor ao longo do tempo, começando no preto, então oscilando os tons de vermelho, então de volta ao preto. Após, o mesmo é feito para o verde, e por fim com a cor azul. e assim o processo se repete.</p>
+			
+			<div class='imagem'>
+				<img src='img/exemplo-timer.gif' >
+				<label>Cores oscilando de acordo com a passagem do tempo</label>
+			</div>
+
+			<pre class='prettyprint linenums' id='codigo'><?php printfile('ccode/timer.c'); ?></pre>
+								
+			<p>Na <span class='linha' data-ln='5'>linha 5</span> criamos a constante <b>FPS</b> que será usada para definir o tempo do timer.</p>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/ALLEGRO_TIMER'>ALLEGRO_TIMER</a></h2>
+			<p>Na <span class='linha' data-ln='12'>linha 12</span> declaramos a variável do tipo ALLEGRO_TIMER, que serve para definir um temporizador, usado para disparar um evento a cada intervalo de tempo.</p>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/al_create_timer'>al_create_timer()</a></h2>
+			<p>Na <span class='linha' data-ln='27'>linha 27</span> chamamos a função al_create_timer() que inicializa o timer. Ela recebe por parâmetro o tempo, em segundos, que será o intervalo de tempo que o timer irá disparar. Este disparo, também chamado de tick, será detectado por um evento. Um timer, quando criado, inicia desativado.</p>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/al_get_timer_event_source'>al_get_timer_event_source()</a></h2>
+			<p>Na <span class='linha' data-ln='52'>linha 52</span> chamamos a função al_register_event_source() para registrar uma fonte de eventos na <b>fila_eventos</b>. A fonte de eventos passada por parâmetro é a fonte de eventos do timer, retornada pela função al_get_timer_event_source().</p>
+
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/al_start_timer'>al_start_timer()</a></h2>
+			<p>Na <span class='linha' data-ln='56'>linha 56</span> chamamos a função al_start_timer(), que serve ativar o timer. A cada tick, ele irá gerar um evento, que poderá ser tratado pelo programa.</p> 
+			
+			<h2>Lógica do programa</h2>
+			
+			<pre class='n-linhas'>83-92</pre>
+			<pre class='n-linhas'>98-103</pre>
+			
+			<ol>
+				<li>Verificar se existem eventos;</li>
+				<li>Caso exista evento do timer, atualiza o vetor <b>cor</b>, e seta a flag <b>desenha=1</b>;</li>
+				<li>Caso <b>desenha==1</b>, atualiza a tela.</li>
+			</ol>
+			
+			<p>Na <span class='linha' data-ln='63'>linha 63</span> criamos a flag <b>desenha</b>. Ela será usada para verificar quando houve um evento de disparo do timer. A cada iteração do loop, o valor desta variável é verificado (<span class='linha' data-ln='98'>linha 98</span>). Se ela estiver em 0, a tela não será atualizada. Quando o evento disparar (<span class='linha' data-ln='83'>linha 83</span>), a flag receberá <b>desenha=1</b> (<span class='linha' data-ln='91'>linha 91</span>).</p>
+			
+			<p>Na <span class='linha' data-ln='67'>linha 67</span> criamos o vetor <b>cor[3]</b>. Cada posição do vetor irá receber um valor, que representará as componentes RPG que resultará na cor que será usada para preencher o fundo da janela na <span class='linha' data-ln='99'>linha 99</span>.</p>
+			
+			<p>Na <span class='linha' data-ln='70'>linha 70</span> criamos as variáveis <b>i</b> e <b>inc</b>. A primeira servirá para saber qual posição do vetor <b>cor</b> será acessado dentro do if da <span class='linha' data-ln='83'>linha 83</span>. A segunda variável irá determinar se a cor deverá ao longo do tempo ficando mais clara ou mais escura. Na <span class='linha' data-ln='84'>linha 84</span> o vetor irá acumular o valor <b>+1</b> ou <b>-1</b>, dependendo do valor de <b>inc</b> (modificado nas linhas <span class='linha' data-ln='86'>86</span> e <span class='linha' data-ln='89'>89</span>).</p>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/ALLEGRO_EVENT'>ALLEGRO_EVENT_TIMER</a></h2>
+			<p>Na <span class='linha' data-ln='83'>linha 83</span> verificamos se o tipo do evento é ALLEGRO_EVENT_TIMER, que é o evento disparado por um temporizador.</p>
+			
+			<p>Em caso afirmativo, na <span class='linha' data-ln='84'>linha 84</span> somamos +1 ou -1 ao vetor <b>cor</b>. Nas linhas <span class='linha' data-ln='85'>85</span> e <span class='linha' data-ln='87'>87</span> verificamos se o vetor na posição analisada chegou ao seus limites, ou seja, 0 ou 255 (pois são os lmites de representação de cada componente RGB). Em caso afirmativo, invertemos o sinal da variável <b>inc</b>(linhas <span class='linha' data-ln='86'>86</span> e <span class='linha' data-ln='89'>89</span>).</p>
+			
+			<p>Na <span class='linha' data-ln='88'>linha 88</span>, incrementamos a variável <b>i</b>, porém aplicando o resto da divisão por 3, fazendo com que os valores da variável vão de 0 até 2, posi a variável irá acessar as posições do vetor.</p>
+			
+			<p>Os valores do vetor vão variar da seguinte maneira:</p>
+			
+			<ol>
+				<li><b>cor[0]</b>(R) irá variar de 0 até 255;</li>
+				<li><b>cor[0]</b>(R) irá variar de 255 até 0;</li>
+				<li><b>cor[1]</b>(G) irá variar de 0 até 255;</li>
+				<li><b>cor[1]</b>(G) irá variar de 255 até 0;</li>
+				<li><b>cor[2]</b>(B) irá variar de 0 até 255;</li>
+				<li><b>cor[2]</b>(B) irá variar de 255 até 0.</li>
+			</ol>
+			
+			<p>Na <span class='linha' data-ln='98'>linha 98</span> testamos se a flag <b>desenha!=0</b> e também não há mais eventos esperando na fila. Em caso aformativo, atualizamos a tela, mostrando a cor determinada pelo vetor <b>cor</b>. Então à variável <b>desenha=0</b>. Isto evitará que a cada iteração do loop principal, a tela seja mostrada, fazendo com que isto aconteça somente quando o evento do timer for disparado, o que acontece 60 vezes por segundo.</p>
+
+			<h3>Outros links</h3>
+			<ul>
+				<li><a target='_blank' href='http://www.rafaeltoledo.net/tutorial-allegro-5-10-timers/'>Timers</a></li>
+				<li><a target='_blank' href='https://wiki.allegro.cc/index.php?title=Allegro_5_Tutorial/Timers'>Allegro 5 Tutorial/Timers</a></li>
+				<li><a target='_blank' href='https://www.youtube.com/watch?v=r5NRj4izukY&list=PL9333715188CD7669&index=8'>Timing Your Game Loop in Allegro 5</a></li>
+			</ul>
+		</div>
+		<div id='btn-footer'>
+			<a class="button-red" href='audio.php'>Anterior</a>
+			<a class="button-red" href='animacoes.php'>Próximo</a>
+		</div>
+	</div>
+</div>
+</body>
+<script src="script/line_link.js"></script>

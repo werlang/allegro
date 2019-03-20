@@ -1,0 +1,46 @@
+# depslib dependency file v1.0
+1478454856 source:d:\proj\hunt.c
+	<allegro5/allegro.h>
+	<allegro5/allegro_native_dialog.h>
+	<allegro5/allegro_image.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_ttf.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_audio.h>
+	<allegro5/allegro_acodec.h>
+	<math.h>
+	<stdlib.h>
+	<time.h>
+	<stdio.h>
+	<string.h>
+
+1478478031 source:d:\dropbox\ifsul\materiais\allegrosite\ccode\hunt\proj\hunt.c
+	<allegro5/allegro.h>
+	<allegro5/allegro_native_dialog.h>
+	<allegro5/allegro_image.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_ttf.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_audio.h>
+	<allegro5/allegro_acodec.h>
+	<math.h>
+	<stdlib.h>
+	<time.h>
+	<stdio.h>
+	<string.h>
+
+1478478031 source:d:\dropbox\ifsul\materiais\allegrosite\ccode\horda\proj\hunt.c
+	<allegro5/allegro.h>
+	<allegro5/allegro_native_dialog.h>
+	<allegro5/allegro_image.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_ttf.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_audio.h>
+	<allegro5/allegro_acodec.h>
+	<math.h>
+	<stdlib.h>
+	<time.h>
+	<stdio.h>
+	<string.h>
+

@@ -1,0 +1,28 @@
+#img-head{
+	background-image: url('../img/ifsul.jpg');
+	background-color: white;
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+	text-align: center;
+	width: 100%;
+	height: 120px;
+	padding: 0px 0px 0px 0px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+}
+
+@media screen and (min-width: 600px) {
+	#img-head{
+		width: 550px;
+		height: 150px;
+	}
+}
+@media screen and (min-width: 1200px) {
+	#img-head{
+		width: 850px;
+		padding: 0px 40px 0px 0px;
+		margin-left: -20px;
+		height: 250px;
+	}
+}

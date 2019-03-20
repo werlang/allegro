@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+<meta charset='utf-8' />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aprendendo Allegro 5 - Eventos</title>
+
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="script/popups.js"></script>
+<script src="script/buttons.js"></script>
+<link rel="stylesheet" href="css/stylesheet.css"/>
+<link rel="stylesheet" href="css/popups.css"/>
+<link rel='stylesheet' href='css/responsive.css'/> 
+<link rel='stylesheet' href='css/buttons.css'/> 
+
+</head>
+<body>
+<?php include_once("functions.php"); ?>
+<?php include_once("side_menu.php"); ?>
+
+<div class='page-wrapper'>
+	<div class="container">
+		<div class='col-m-12'>
+			<h1>Entendendo eventos</h1>
+			
+			<p>O allegro 5 introduziu o uso de eventos. Eventos são coisa que acontecem no programa desde cliques e movimentos do mouse, teclas serem pressionadas, um temporizador disparou, dentre outras coisas.</p>
+			
+			<p>Caso o allegro não tivesse suporte a eventos, teríamos que verificar quando cada uma destas coisas acontecessem no programa em determinados espaços de tempo, e esta tarefa deixaria é demandante para o processador.</p>
+			
+			<p>Para lidar com eventos, usamos uma fila de eventos. Cada vez que um evento acontece, ele é colocado na fila. Então quando o programa verificar se existe algum evento a ser tratado, removemos da fila o evento mais antigo e tratamos ele.</p>
+			
+			<p>No exemplo abaixo, iremos criar um evento que permite tratar o que acontece ao clicar no botão X que fecha a janela. Analisemos o código:</p>
+						
+			<pre class="prettyprint linenums" id='codigo'><?php printfile('ccode/eventos.c'); ?></pre>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/ALLEGRO_EVENT_QUEUE'>ALLEGRO_EVENT_QUEUE</a></h2>
+			<p>Na <span class='linha' data-ln='20'>linha 20</span> criamos a variável que será usada como a fila de eventos, explicada anteriormente. Toda vez que um evento for disparado, ele será guardado nesta fila. E toda vez que quisermos remover um evento da fila (para resolver ele), sempre será removido o evento que está aguardando a mais tempo, como numa fila de pessoas esperando por atendimento.</p>
+					
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/al_create_event_queue'>al_create_event_queue()</a></h2>
+			<p>Na <span class='linha' data-ln='52'>linha 52</span> chamamos a função al_create_event_queue(), que cria uma fila de eventos vazia. A fila é atribuída á variável <b>fila_eventos</b>. Em caso de falha retorna NULL. O caso de falha está sendo verificado na <span class='linha' data-ln='54'>linha 54</span>.</p>
+
+			<pre class='n-linhas'>51-61</pre>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/al_register_event_source'>al_register_event_source()</a></h2>
+			<p>Na <span class='linha' data-ln='61'>linha 61</span> chamamos a função al_register_event_source() que serve para ligar uma fonte de eventos à fila de eventos criada. Sem isto, por mais que os eventos ocorressem, o programa não iria colocá-los na fila. A função recebe por parâmetro a fila de eventos e a fonte dos eventos. Como queremos que a nossa fonte de eventos seja a janela, então chamamos a função <a target='_blank' href='https://www.allegro.cc/manual/5/al_get_display_event_source'>al_get_display_event_source()</a>, que retorna a fonte de eventos da janela passada por parâmetro.</p>
+			
+			<p>A seguir desenhamos a imagem na janela (<span class='linha' data-ln='64'>linha 64</span>) e atualizamos a tela (<span class='linha' data-ln='67'>linha 67</span>).</p>
+			
+			<pre class='n-linhas'>69-85</pre>
+			
+			<p>O while acima é onde futuramente ficará toda lógica dos jogos que criaremos. Todo jogo se baseia em atualizar a tela em um intervalo de tempo predeterminado (idealmente 60 vezes por segundo, ou 60 fps), além de capturar entrada do usuário (por teclado, mouse, ou outros) e executar a lógica específica do jogo. Este processo acontece repetidamente até que o jogo termine. Neste nosso tutorial que trata de eventos, iremos utilizar o while para ficar "escutando" o evento do clique do X da janela.</p>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/ALLEGRO_EVENT'>ALLEGRO_EVENT</a></h2>
+			<p>Na <span class='linha' data-ln='71'>linha 71</span> criamos uma variável que irá guardar um evento. Basicamente pegaremos um evento da fila (quando um estiver disponível) e colocamos ele na variável <b>evento</b>. As variáveis ALLEGRO_EVENT são structs, cujo campo type indica o tipo de evento que foi disparado. Consulte a referência para a lista completa de tipos de eventos possíveis.</p>
+									
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/al_wait_for_event'>al_wait_for_event()</a></h2>
+			<p>Na <span class='linha' data-ln='73'>linha 73</span> chamamos a função al_wait_for_event(), que remove o primeiro item da fila de eventos e coloca na variável <b>evento</b>.</p>
+			
+			<p>Na <span class='linha' data-ln='76'>linha 76</span> verificamos se o tipo do evento (campo type da variável ALLEGRO_EVENT) disparado foi <a target='_blank' href='https://www.allegro.cc/manual/5/ALLEGRO_EVENT'>ALLEGRO_EVENT_DISPLAY_CLOSE</a>. Em caso afirmativo, significa que o usuário clicou no botão para fechar a janela.</p>
+
+			<p>Na <span class='linha' data-ln='77'>linha 77</span> mostramos uma mensagem perguntando se o usuário deseja fechar o programa. Caso o botão Sim seja clicando, o break na <span class='linha' data-ln='80'>linha 80</span> fará com que o while encerre.</p>
+			
+			<p>Ao fim do programa, nas linhas <span class='linha' data-ln='88'>88</span> e <span class='linha' data-ln='89'>89</span>, os espaços de memória para a janela e fila de eventos são liberados.</p>
+
+			<h3>Outros links</h3>
+			<ul>
+				<li><a target='_blank' href='http://www.rafaeltoledo.net/tutorial-allegro-5-3-eventos/'>Eventos</a></li>
+				<li><a target='_blank' href='https://wiki.allegro.cc/index.php?title=Allegro_5_Tutorial/Events'>Allegro 5 Tutorial/Events</a></li>
+			</ul>
+		</div>
+		<div id='btn-footer'>
+			<a class="button-red" href='fontes.php'>Anterior</a>
+			<a class="button-red" href='mouse.php'>Próximo</a>
+		</div>
+	</div>
+	
+</div>
+</body>
+<script src="script/line_link.js"></script>

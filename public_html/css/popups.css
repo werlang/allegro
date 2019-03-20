@@ -1,0 +1,117 @@
+.tooltip {
+	position:absolute;
+	display: none;
+	background-color: #E87460;
+	border: 1px solid black;
+	border-radius: 3px;
+	box-sizing: border-box;
+	font-weight: bold;
+	font-family: sans-serif;
+	word-wrap:break-word;
+	color: black;
+	z-index: 1;
+	padding: 5px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(164, 164, 164, 1);
+    box-shadow: 0px 0px 5px 0px rgba(164, 164, 164, 1);
+}
+.popup{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	height: 100%;
+	width: 100%;
+    margin: auto;
+	display: none;
+	background-color: rgba(0, 0, 0, .7);
+	z-index: 1;
+	text-align: center;
+
+	-webkit-transition: opacity 0.5s;
+	-moz-transition: opacity 0.5s;
+	-ms-transition: opacity 0.5s;
+	-o-transition: opacity 0.5s;
+	-transition: opacity 0.5s;	
+}
+.popup:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+}
+
+.popup > div{
+	max-width: 100%;
+	box-sizing: border-box;
+	background-color: #ccc;
+	border: 1px solid black;
+	border-radius: 5px;
+	color: black;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(164, 164, 164, 1);
+    box-shadow: 0px 0px 5px 0px rgba(164, 164, 164, 1);
+	z-index: 2;
+	padding: 15px;
+	display: inline-block;
+	vertical-align: middle;
+}
+  
+.message {
+	text-align: center;
+	font-weight: bold;
+} 
+
+.window {
+	text-align: left;
+}
+.window [class*="col-"] {
+	padding-left: 5px;
+	padding-right: 5px;
+	float: left;
+}
+.window h1 {
+	font-size: 30px;
+	margin: 10px 0px;
+	padding-left: 15px;
+}
+.window h2 {
+	font-size: 20px;
+	margin: 10px 0px;
+	padding-left: 15px;
+}
+.window .button-red:disabled .loadimg {
+	height: 14px;
+	width: 14px;
+}
+
+.window div,
+.window input,
+.window button
+{
+	font-size: 14px;
+}
+
+.window.f-size .col-6 { width: 100%; }
+.window.f-size .col-5 { width: 83.3%; }
+.window.f-size .col-4 { width: 66.6%; }
+.window.f-size .col-3 { width: 50%; }
+.window.f-size .col-2 { width: 33.3%; }
+.window.f-size .col-1 { width: 16.6%; }
+
+.window.m-size [class*="col-"]{ width: 100%; }
+ 
+/*revisar redbox depois*/
+.popup.window .redbox {
+	border: 2px black solid;
+	padding: 10px;
+	background-color: #fff;
+	font-weight: normal;
+	text-decoration: none;
+	text-align: center;
+	color: red;
+	display: block;
+	margin: 15px;
+    -webkit-box-shadow: 3px 3px 5px 0px rgba(164, 164, 164, 1);
+    box-shadow: 3px 3px 5px 0px rgba(164, 164, 164, 1);
+	
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<head>
+<meta charset='utf-8' />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aprendendo Allegro 5 - Sprites</title>
+
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="script/popups.js"></script>
+<script src="script/buttons.js"></script>
+<link rel="stylesheet" href="css/stylesheet.css"/>
+<link rel="stylesheet" href="css/popups.css"/>
+<link rel='stylesheet' href='css/responsive.css'/> 
+<link rel='stylesheet' href='css/buttons.css'/> 
+
+
+<style>
+	#mario { width: 128px; }
+</style>
+</head>
+<body>
+<?php include_once("functions.php"); ?>
+<?php include_once("side_menu.php"); ?>
+
+<div class='page-wrapper'>
+	<div class="container">
+		<div class='col-m-12'>
+			<h1>Animando sprites</h1>
+						
+			<p>Um sprite é uma imagem estacionária, que quando trocada por outra imagem parecida em um pequeno intervalo de tempo, dá a ilusão de movimento.</p>
+			
+			<div class='imagem'>
+				<img id='mario' src='img/mario.gif' >
+				<label>mario.gif utiliza apenas 3 sprites</label>
+			</div>
+			
+			<p>No gif acima, pela taxa de atualização de cada frame da imagem, percebe-se nitidamente que são imagens estacionárias colocadas em sequência. Caso a taxa de atualização da imagem (FPS) aumente, dará a impressão de movimento, como no jogo original do mario.</p>
+
+			<p>Neste exemplo, iremos criar um programa que possui uma imagem de fundo, e um personagem correndo de um lado para o outro do cenário.</p>
+
+			<div class='imagem'>
+				<img src='img/exemplo-sprites.gif' >
+				<label>Garoto incansavelmente correndo pelo campo</label>
+			</div>
+
+			<p>Antes de explicar o código, é importante saber como funciona uma sprite. Para isso você precisa saber que os sprites que compões uma animação normalmente não vêm em arquivos de imagens separados. Até poderiam, mas não vêm. Normalmente eles estão todos juntos em um arquivo de imagem só, chamado folha de sprites (spritesheet, do inglês). No nosso programa, iremos usar um fundo estacionário, e folha de sprite abaixo:</p>
+
+			<div class='imagem'>
+				<img src='ccode/background.png' >
+				<label>Fundo verde e feliz</label>
+			</div>
+
+			<div class='imagem'>
+				<img src='ccode/run2.bmp' >
+				<label>Folha de sprites do garoto corredor</label>
+			</div>
+
+			<p>Note que a folha de sprite possui todas as posições necessárias para o ciclo completo da movimentação do personagem. O fundo está na cor rosa e é a cor que será ignorada pelo programa, como aquelas <a target='_blank' href='http://digitalsynopsis.com/wp-content/uploads/2015/04/movies-before-after-green-screen-cgi-alice-in-wonderland.jpg'>telas verdes do cinema</a>.</p>
+
+			<p>Para realizar a movimentação, precisamos a cada intervalo de tempo definido, mostrar um pedaço diferente da folha de sprites, e é essa a lógica que será explicada neste código:</p>
+					
+			<pre class='prettyprint linenums' id='codigo'><?php printfile('ccode/sprites.c'); ?></pre>
+					
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/al_convert_mask_to_alpha'>al_convert_mask_to_alpha()</a></h2>
+			<p>Na <span class='linha' data-ln='56'>linha 56</span> carregamos a folha de sprites em <b>folha_sprite</b>, e na <span class='linha' data-ln='65'>linha 65</span> chamamos a função al_convert_mask_to_alpha() que recebe um bitmap e uma cor, e faz com que a cor passada por parâmetro seja considerada transparente dentro do bitmap. Isto faz com que a cor de fundo do arquivo (R:255, G:0, B:255) seja considerada como cor transparente. Caso o arquivo carregado já possua transparência (<a target='_blank' href='https://pt.wikipedia.org/wiki/Canal_alfa'>canal alpha</a>), como alguns arquivos .png por exemplo, você não precisará usar este comando.</p>
+
+			<h2>Lógica do problema</h2>
+			<p>Logo no início da função main(), criamos as principais variáveis responsáveis pela lógica da animação:</p>
+
+			<pre class='n-linhas'>89-102</pre>
+
+			<p>Começando pelo mais básico, quando formos mostrar um sprite na tela, não podemos mostrar toda a folha, portanto precisamos saber a largura e altura de cada sprite. É importante que a folha seja criada de maneira que suas dimensões sejam constantes e existe simetria entre eles. Mas isto é tarefa do designer do jogo. As variáveis que representam estas dimensões são <b>altura_sprite</b> e <b>largura_sprite</b> (<span class='linha' data-ln='90'>linha 90</span>).</p>
+
+			<p>Precisamos também saber qual a região da folha que será impressa na tela para o sprite atual, pois para o primeiro sprite será a região inicial da folha, onde <b>X==0</b> e <b>Y==0</b>, mas para o segundo sprite, deverá ser <b>X==108</b> (largura do sprite) e <b>Y==0</b>. Estas variáveis são <b>regiao_x_folha</b> e <b>regiao_y_folha</b> (<span class='linha' data-ln='96'>linha 96</span>).</p>
+
+			<p>Como percebe-se, precisamos ir acrescendo a <b>regiao_x_folha</b> para cada novo sprite a ser mostrado. Mas quantas vezes poderei fazer isso, antes de ter que pular para a próxima linha da folha (e recomeçar da primeira coluna)? Por conta disso, as variáveis <b>colunas_folha</b>, <b>linhas_folha</b>,  <b>linha_atual</b> e <b>coluna_atual</b>. Estas representam quantas colunas e linhas possui a folha, e qual linha e coluna estamos mostrando atualmente, respectivamente (<span class='linha' data-ln='92'>linha 92</span> e <span class='linha' data-ln='94'>linha 94</span>).</p>
+
+			<p>Agora precisamos saber de quanto em quanto tempo trocaremos de um sprite para o outro. Como o tempo do jogo é medido em frames, as variáveis <b>frames_sprite</b> e <b>cont_frames</b> guardarão quantos frames precisam passar para que o sprite seja trocado, e quantos frames já se passaram desde a última troca, respectivamente (<span class='linha' data-ln='98'>linha 98</span>). Note que quanto menor o valor, de <b>frames_sprite</b>, mais "rápida" será a transição.</p>
+
+			<p>Bom, só resta agora saber onde que o sprite será posicionado. As variáveis <b>pos_x_sprite</b> e <b>pos_y_sprite</b> representam as coordenadas X e Y da tela, respectivamente, que o sprite será posicionado (<span class='linha' data-ln='100'>linha 100</span>), enquanto as variáveis <b>vel_x_sprite</b> e <b>vel_y_sprite</b> representam qual o acréscimo de posição nas coordenadas X e Y que o sprite sofrerá a cada frame (<span class='linha' data-ln='102'>linha 102</span>).</p>
+			
+			<p>Caso haja a necessidade da criação de vários sprites diferentes no programa, recomendo a criação de uma struct de sprites, onde cada elemento desta struct vai possuir estas variáveis.</p>
+
+			<p>As linhas a seguir mostram a lógica que transcorre a cada frame:</p>
+			
+			<pre class='n-linhas'>113-145</pre>
+
+			<p>Na <span class='linha' data-ln='115'>linha 115</span> o <b>cont_frames</b> incrementa a cada vez que o timer disparar, e na <span class='linha' data-ln='117'>linha 117</span> é verificado se passou uma quantidade de frames suficiente para trocar o sprite.</p>
+			
+			<p>Em caso afirmativo, resetamos o <b>cont_frames</b> (<span class='linha' data-ln='119'>linha 119</span>) e incrementamos a <b>coluna_atual</b> indicando que o sprite a ser mostrado está na próxima coluna da folha (<span class='linha' data-ln='121'>linha 121</span>).</p>
+			
+			<p>Na <span class='linha' data-ln='123'>linha 123</span> testamos se a coluna atualmente mostrada alcançou o número de colunas da folha, e em caso afirmativo, voltamos para a coluna 0 (<span class='linha' data-ln='125'>linha 125</span>), pulamos para próxima linha aplicando o resto da divisão para que a linha volte a ser 0 quando passar da última linha (<span class='linha' data-ln='127'>linha 127</span>) e por fim, calculando a região Y da folha (<span class='linha' data-ln='129'>linha 129</span>), que é a linha*altura do sprite e a região X da folha (<span class='linha' data-ln='132'>linha 132</span>) que é a coluna*largura do sprite.</p>
+			
+			<p>Até então atualizamos o sprite, e agora nos resta atualizar a posição que ele será mostrado na janela. Para isso, na <span class='linha' data-ln='135'>linha 135</span> testamos se o sprite está perto de uma das bordas da janela. <b>pos_x_sprite + largura_sprite</b> calula onde está a borda da direita do sprite, e <b>LARGURA_TELA - 20</b> é 20 pixels à direita da borda da janela. <b>pos_x_sprite < 20</b> verifica se o sprite está a menos de 20 pixels da borda esquerda da janela. Caso o sprite esteja próximo a uma das duas bordas da janela, a velocidade X do sprite irá alterar o sentido (<span class='linha' data-ln='137'>linha 137</span>), ou seja, ele irá começar a andar no sentido inverso que andava antes se afastando da borda da janela.</p>
+			
+			<p>Na <span class='linha' data-ln='141'>linha 141</span> e <span class='linha' data-ln='142'>linha 142</span> as posições X e Y do sprite que será mostrado é atualizada. Caso a velocidade seja positiva, a posição será acrescida, e caso seja negativa, decrescida.</p>
+			
+			<p>Resta agora entender a parte que atualiza o conteúdo da janela:</p>
+			
+			<pre class='n-linhas'>151-174</pre>
+
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/al_draw_bitmap_region'>al_draw_bitmap_region()</a></h2>
+			<p>Na <span class='linha' data-ln='154'>linha 154</span> usarmos a função al_draw_bitmap_region() ao invés da conhecida al_draw_bitmap(). A diferença entre as duas é que a primeira mostra somente um pedaço do bitmap na tela. Ela recebe os segintes parâmetros:</p>
+			
+			<ul>
+				<li>A variável ALLEGRO_BITMAP a ser mostrada</li>
+				<li>A posição X do bitmap</li>
+				<li>A posição Y do bitmap</li>
+				<li>A largura da parte mostrada do bitmap</li>
+				<li>A altura da parte mostrada do bitmap</li>
+				<li>A posição X da tela</li>
+				<li>A posição Y da tela</li>
+				<li>As mesmas flags que <a target='_blank' href='https://www.allegro.cc/manual/5/al_draw_bitmap'>al_draw_bitmap()</a></li>
+			</ul>
+			
+			<p>Após mostrar a imagem de fundo, verificamos na <span class='linha' data-ln='157'>linha 157</span> se a velocidade é positiva ou não. Fazemos isso pois caso seja negativa, teremos que mostrar o sprite espelhado.</p>
+			
+			<p>Caso seja positiva, mostramos o conteúdo da folha de sprites na região que contém o sprite desejado:</p>
+			
+			<pre class='n-linhas'>159-162</pre>
+			
+			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/al_draw_scaled_bitmap'>al_draw_scaled_bitmap()</a></h2>
+			<p>Caso contrário, chamamos a função al_draw_scaled_bitmap() que serve para mostrar um bitmap com suas dimensões alteradas. Assim como o al_draw_bitmap_region(), ele mostra um pedaço específico do bitmap, porém note os dois parâmetros extras:</p>
+			
+			<ul>
+				<li>A variável ALLEGRO_BITMAP a ser mostrada</li>
+				<li>A posição X do bitmap</li>
+				<li>A posição Y do bitmap</li>
+				<li>A largura da parte mostrada do bitmap</li>
+				<li>A altura da parte mostrada do bitmap</li>
+				<li>A posição X da tela</li>
+				<li>A posição Y da tela</li>
+				<li><b>A largura do bitmap na tela</b></li>
+				<li><b>A altura do bitmap na tela</b></li>
+				<li>As mesmas flags que <a target='_blank' href='https://www.allegro.cc/manual/5/al_draw_bitmap'>al_draw_bitmap()</a></li>
+			</ul>
+			
+			<pre class='n-linhas'>165-169</pre>
+			
+			<p>Note que no código usamos o valor negativo da largura do sprite para mostrá-lo na tela. Isto significa que o sprite será mostrado espelhado no eixo X. Para compensar o fato que sua largura se dará para esquerda e não para a direita, mandamos mostrar na tela <b>pos_x_sprite+largura_sprite</b> como sua posição X.</p>
+				
+			<h3>Download dos arquivos</h3>
+			<ul>
+				<li><a href='ccode/background.png' download>Imagem de fundo</a></li>
+				<li><a href='ccode/run2.bmp' download>Folha de sprites</a></li>
+			</ul>
+				
+			<h3>Outros links</h3>
+			<ul>
+				<li><a target='_blank' href='https://www.youtube.com/watch?v=lAW6H5WvrqE&list=PL9333715188CD7669&index=23'>Sprite Sheet Animation in Allegro 5</a></li>
+			</ul>
+		</div>
+		<div id='btn-footer'>
+			<a class="button-red" href='teclado.php'>Anterior</a>
+			<a class="button-red" href='jogo.php'>Próximo</a>
+		</div>
+	</div>
+</div>
+</body>
+<script src="script/line_link.js"></script>
