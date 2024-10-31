@@ -1,0 +1,12 @@
+services:
+    web:
+        image: pswerlang/php-apache
+        volumes:
+            - ./public_html:/var/www/html
+        networks:
+            - allegro
+        restart: unless-stopped
+
+networks:
+    allegro:
+        name: allegro
