@@ -2,7 +2,7 @@ body{
 	font-size: 20px;
 	font-family: sans-serif;
 	background-color: #ddd;
-	background-image: url('../img/background.jpg');
+	color: #333;
 }
 h1 {
 	padding-top: 15px;
@@ -25,18 +25,12 @@ div.imagem img{
 	margin: auto;
 	max-width: 100%;
 	width: 350px;
+	border-radius: 3px;
 }
 div.imagem label {
 	display: block;
 	color: #555;
 	font-size: 14px;
-}
-
-.container {
-	background-color: #dddddd;
-	border-radius: 15px;
-	border: 2px solid #aaaaaa;
-	box-shadow: 0px 0px 20px 0px #000;
 }
 
 .quote{
@@ -57,6 +51,7 @@ pre{
 	background-color: #f5f5f5;
 	overflow: auto;
 	font-size: 16px;
+	border-radius: 3px;
 }
 a{
 	text-decoration: none;
