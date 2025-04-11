@@ -1,6 +1,6 @@
-![enter image description here](https://allegroc.tk/img/exemplo-sprites.gif)
+![Buy running](https://allegro.werlang.site/img/exemplo-sprites.gif)
 
 # Aprendendo Allegro
 Tutorial para biblioteca Allegro
 
-acesse em https://allegroc.tk
+acesse em [https://allegro.werlang.site](https://allegro.werlang.site)
