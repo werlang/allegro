@@ -6,9 +6,10 @@
 <title>Aprendendo Allegro 5 - Timers</title>
 
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="script/popups.js"></script>
 <script src="script/buttons.js"></script>
+<script type="module" src="script/codeLoader.js"></script>
+<script type="module" src="script/side_menu_loader.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css"/>
 <link rel="stylesheet" href="css/popups.css"/>
 <link rel='stylesheet' href='css/responsive.css'/> 
@@ -16,8 +17,8 @@
 
 </head>
 <body>
-<?php include_once("functions.php"); ?>
-<?php include_once("side_menu.php"); ?>
+<!-- Side Menu Container -->
+<div id="side-menu-container"></div>
 
 <div class='page-wrapper'>
 	<div class="container">
@@ -33,7 +34,7 @@
 				<label>Cores oscilando de acordo com a passagem do tempo</label>
 			</div>
 
-			<pre class='prettyprint linenums' id='codigo'><?php printfile('ccode/timer.c'); ?></pre>
+			<pre class='prettyprint linenums' id='codigo' data-code-file='ccode/timer.c'></pre>
 								
 			<p>Na <span class='linha' data-ln='5'>linha 5</span> criamos a constante <b>FPS</b> que será usada para definir o tempo do timer.</p>
 			
@@ -94,10 +95,11 @@
 			</ul>
 		</div>
 		<div id='btn-footer'>
-			<a class="button-red" href='audio.php'>Anterior</a>
-			<a class="button-red" href='animacoes.php'>Próximo</a>
+			<a class="button-red" href='audio.html'>Anterior</a>
+			<a class="button-red" href='animacoes.html'>Próximo</a>
 		</div>
 	</div>
 </div>
+
 </body>
-<script src="script/line_link.js"></script>
+</html>

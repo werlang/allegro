@@ -6,9 +6,10 @@
 <title>Aprendendo Allegro 5</title>
 
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="script/popups.js"></script>
 <script src="script/buttons.js"></script>
+<script type="module" src="script/codeLoader.js"></script>
+<script type="module" src="script/side_menu_loader.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css"/>
 <link rel="stylesheet" href="css/popups.css"/>
 <link rel='stylesheet' href='css/responsive.css'/> 
@@ -17,8 +18,8 @@
 
 </head>
 <body>
-<?php include_once("functions.php"); ?>
-<?php include_once("side_menu.php"); ?>
+<!-- Side Menu Container -->
+<div id="side-menu-container"></div>
 
 <div class='page-wrapper'>
 	<div class="container">
@@ -49,9 +50,10 @@
 			
 		</div>
 		<div id='btn-footer'>
-			<a class="button-red" href='janela.php'>Começar</a>
+			<a class="button-red" href='janela.html'>Começar</a>
 		</div>
 	</div>
 </div>
+
 </body>
-<script src="script/line_link.js"></script>
+</html>

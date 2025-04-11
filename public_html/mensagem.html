@@ -6,18 +6,19 @@
 <title>Aprendendo Allegro 5 - Caixa de texto</title>
 
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="script/popups.js"></script>
 <script src="script/buttons.js"></script>
+<script type="module" src="script/codeLoader.js"></script>
+<script type="module" src="script/side_menu_loader.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css"/>
 <link rel="stylesheet" href="css/popups.css"/>
 <link rel='stylesheet' href='css/responsive.css'/> 
-<link rel='stylesheet' href='css/buttons.css'/> 
+<link rel='stylesheet' href='css/buttons.css'/>
 
 </head>
 <body>
-<?php include_once("functions.php"); ?>
-<?php include_once("side_menu.php"); ?>
+<!-- Side Menu Container -->
+<div id="side-menu-container"></div>
 
 <div class='page-wrapper'>
 	<div class="container">
@@ -26,7 +27,7 @@
 			
 			<p>Podemos usar o allegro para mostrar caixas de texto nativas da interface gráfica do sistema operacional. Esta função é útil quando queremos reportar algum erro no allegro, como por exemplo falha ao encontrar arquivos de imagens, sons, etc. Vamos ao código:</p>
 			
-			<pre class="prettyprint linenums" id='codigo'><?php printfile('ccode/mensagem.c'); ?></pre>
+			<pre class='prettyprint linenums' id='codigo' data-code-file='ccode/mensagem.c'></pre>
 		
 			<p>Na <span class='linha' data-ln='2'>linha 2</span> fazemos o include do módulo allegro_native_dialog, que permite a chamada da janela.</p>
 			
@@ -67,11 +68,12 @@
 			</ul>
 		</div>
 		<div id='btn-footer'>
-			<a class="button-red" href='imagem.php'>Anterior</a>
-			<a class="button-red" href='fontes.php'>Próximo</a>
+			<a class="button-red" href='imagem.html'>Anterior</a>
+			<a class="button-red" href='fontes.html'>Próximo</a>
 		</div>
 	</div>
 	
 </div>
+
 </body>
-<script src="script/line_link.js"></script>
+</html>

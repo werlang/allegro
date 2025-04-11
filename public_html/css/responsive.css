@@ -91,9 +91,6 @@ h1,h2,h3 {
 		height: 16px;
 		width: 16px;
 	}
-	[class*="col-"] {
-		float: left;
-	}
 	.form-label {
 		text-align: right;
 	}
@@ -137,9 +134,6 @@ h1,h2,h3 {
 	.button-red:disabled .loadimg {
 		height: 20px;
 		width: 20px;
-	}
-	[class*="col-"] {
-		float: left;
 	}
 	.row {
 		margin-bottom: 15px;

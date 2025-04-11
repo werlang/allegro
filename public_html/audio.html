@@ -3,12 +3,13 @@
 <meta charset='utf-8' />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aprendendo Allegro 5 - Audio</title>
+<title>Aprendendo Allegro 5 - Áudio</title>
 
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="script/popups.js"></script>
 <script src="script/buttons.js"></script>
+<script type="module" src="script/codeLoader.js"></script>
+<script type="module" src="script/side_menu_loader.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css"/>
 <link rel="stylesheet" href="css/popups.css"/>
 <link rel='stylesheet' href='css/responsive.css'/> 
@@ -16,8 +17,8 @@
 
 </head>
 <body>
-<?php include_once("functions.php"); ?>
-<?php include_once("side_menu.php"); ?>
+<!-- Side Menu Container -->
+<div id="side-menu-container"></div>
 
 <div class='page-wrapper'>
 	<div class="container">
@@ -57,7 +58,7 @@
 				<label>Aiao. Quando clica no retângulo azul</label>
 			</div>
 			
-			<pre class='prettyprint linenums' id='codigo'><?php printfile('ccode/audio.c'); ?></pre>
+			<pre class='prettyprint linenums' id='codigo' data-code-file='ccode/audio.c'></pre>
 								
 			<p>Nas linhas <span class='linha' data-ln='3'>3</span> e <span class='linha' data-ln='4'>4</span> fazemos include nas bibliotecasdos addons allegro_audio e allegro_acodec, que permitem que utilizemos as funções de audio do allegro.</p>
 			
@@ -135,10 +136,11 @@
 			</ul>
 		</div>
 		<div id='btn-footer'>
-			<a class="button-red" href='teclado.php'>Anterior</a>
-			<a class="button-red" href='timer.php'>Próximo</a>
+			<a class="button-red" href='teclado.html'>Anterior</a>
+			<a class="button-red" href='timer.html'>Próximo</a>
 		</div>
 	</div>
 </div>
+
 </body>
-<script src="script/line_link.js"></script>
+</html>

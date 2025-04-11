@@ -1,12 +1,19 @@
-$(document).ready(function(){
-	$(document).on( 'click', '.button-red.can-disable', function(){
-		$(this).attr("disabled", true);
-		$(this).prepend("<img src='icons/loading.gif' class='loadimg' />");
-		//alert('clicou');
-	} );
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('button-red') && event.target.classList.contains('can-disable')) {
+            event.target.setAttribute('disabled', true);
+            const loadingImg = document.createElement('img');
+            loadingImg.src = 'icons/loading.gif';
+            loadingImg.className = 'loadimg';
+            event.target.insertAdjacentElement('afterbegin', loadingImg);
+        }
+    });
 });
 
-function enable_button(obj){
-	obj.prop('disabled', false);
-	obj.find('.loadimg').remove();
+function enable_button(obj) {
+    obj.disabled = false;
+    const loadImg = obj.querySelector('.loadimg');
+    if (loadImg) {
+        loadImg.remove();
+    }
 }

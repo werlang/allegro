@@ -5,10 +5,11 @@
 
 <title>Aprendendo Allegro 5 - Animações</title>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 <script src="script/popups.js"></script>
 <script src="script/buttons.js"></script>
+<script type="module" src="script/codeLoader.js"></script>
+<script type="module" src="script/side_menu_loader.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css"/>
 <link rel="stylesheet" href="css/popups.css"/>
 <link rel='stylesheet' href='css/responsive.css'/> 
@@ -16,8 +17,8 @@
 
 </head>
 <body>
-<?php include_once("functions.php"); ?>
-<?php include_once("side_menu.php"); ?>
+<!-- Side Menu Container -->
+<div id="side-menu-container"></div>
 
 <div class='page-wrapper'>
 	<div class="container">
@@ -33,7 +34,7 @@
 				<label>Quadrado vermelho deslizando pela janela</label>
 			</div>
 			
-			<pre class='prettyprint linenums' id='codigo'><?php printfile('ccode/animacoes.c'); ?></pre>
+			<pre class='prettyprint linenums' id='codigo' data-code-file='ccode/animacoes.c'></pre>
 			
 			<p>Na <span class='linha' data-ln='12'>linha 12</span> declaramos o bitmap que representará o quadrado vermelho que ficará se movendo na tela, e na <span class='linha' data-ln='42'>linha 42</span> criamos ele com as dimensões 50x50 pixels.</p>
 			
@@ -63,11 +64,11 @@
 			</ul>
 		</div>
 		<div id='btn-footer'>
-			<a class="button-red" href='timer.php'>Anterior</a>
-			<a class="button-red" href='sprites.php'>Próximo</a>
+			<a class="button-red" href='timer.html'>Anterior</a>
+			<a class="button-red" href='sprites.html'>Próximo</a>
 		</div>
 	</div>
 </div>
-</body>
-<script src="script/line_link.js"></script>
 
+</body>
+</html>

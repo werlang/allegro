@@ -3,21 +3,22 @@
 <meta charset='utf-8' />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aprendendo Allegro 5 - Fontes e texto</title>
+<title>Aprendendo Allegro 5 - Fontes</title>
 
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="script/popups.js"></script>
 <script src="script/buttons.js"></script>
+<script type="module" src="script/codeLoader.js"></script>
+<script type="module" src="script/side_menu_loader.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css"/>
 <link rel="stylesheet" href="css/popups.css"/>
 <link rel='stylesheet' href='css/responsive.css'/> 
-<link rel='stylesheet' href='css/buttons.css'/> 
+<link rel='stylesheet' href='css/buttons.css'/>
 
 </head>
 <body>
-<?php include_once("functions.php"); ?>
-<?php include_once("side_menu.php"); ?>
+<!-- Side Menu Container -->
+<div id="side-menu-container"></div>
 
 <div class='page-wrapper'>
 	<div class="container">
@@ -31,7 +32,7 @@
 				<label>Saída de texto do allegro</label>
 			</div>
 
-			<pre class="prettyprint linenums" id='codigo'><?php printfile('ccode/fontes.c'); ?></pre>
+			<pre class="prettyprint linenums" id='codigo' data-code-file='ccode/fontes.c'></pre>
 			
 			<p>Nas linhas <span class='linha' data-ln='4'>4</span> e <span class='linha' data-ln='5'>5</span> fazemos um include nas bibliotecas dos addons allegro_font e allegro_ttf, que possuem as funções que permitem trabalhar com as fontes.</p>
 			
@@ -91,11 +92,12 @@
 			</ul>
 		</div>
 		<div id='btn-footer'>
-			<a class="button-red" href='mensagem.php'>Anterior</a>
-			<a class="button-red" href='eventos.php'>Próximo</a>
+			<a class="button-red" href='mensagem.html'>Anterior</a>
+			<a class="button-red" href='eventos.html'>Próximo</a>
 		</div>
 	</div>
 	
 </div>
+
 </body>
-<script src="script/line_link.js"></script>
+</html>

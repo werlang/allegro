@@ -6,22 +6,22 @@
 <title>Aprendendo Allegro 5 - Jogo</title>
 
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="script/popups.js"></script>
 <script src="script/buttons.js"></script>
+<script type="module" src="script/codeLoader.js"></script>
+<script type="module" src="script/side_menu_loader.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css"/>
 <link rel="stylesheet" href="css/popups.css"/>
 <link rel='stylesheet' href='css/responsive.css'/> 
 <link rel='stylesheet' href='css/buttons.css'/> 
-
 
 <style>
 	#mario { width: 128px; }
 </style>
 </head>
 <body>
-<?php include_once("functions.php"); ?>
-<?php include_once("side_menu.php"); ?>
+<!-- Side Menu Container -->
+<div id="side-menu-container"></div>
 
 <div class='page-wrapper'>
 	<div class="container">
@@ -48,9 +48,10 @@
 
 		</div>
 		<div id='btn-footer'>
-			<a class="button-red" href='sprites.php'>Anterior</a>
+			<a class="button-red" href='sprites.html'>Anterior</a>
 		</div>
 	</div>
 </div>
+
 </body>
-<script src="script/line_link.js"></script>
+</html>

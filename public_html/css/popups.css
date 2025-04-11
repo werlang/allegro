@@ -11,7 +11,6 @@
 	color: black;
 	z-index: 1;
 	padding: 5px;
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(164, 164, 164, 1);
     box-shadow: 0px 0px 5px 0px rgba(164, 164, 164, 1);
 }
 .popup{
@@ -27,12 +26,7 @@
 	background-color: rgba(0, 0, 0, .7);
 	z-index: 1;
 	text-align: center;
-
-	-webkit-transition: opacity 0.5s;
-	-moz-transition: opacity 0.5s;
-	-ms-transition: opacity 0.5s;
-	-o-transition: opacity 0.5s;
-	-transition: opacity 0.5s;	
+	transition: opacity 0.5s;	
 }
 .popup:before {
     display: inline-block;
@@ -48,7 +42,6 @@
 	border: 1px solid black;
 	border-radius: 5px;
 	color: black;
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(164, 164, 164, 1);
     box-shadow: 0px 0px 5px 0px rgba(164, 164, 164, 1);
 	z-index: 2;
 	padding: 15px;
@@ -111,7 +104,6 @@
 	color: red;
 	display: block;
 	margin: 15px;
-    -webkit-box-shadow: 3px 3px 5px 0px rgba(164, 164, 164, 1);
     box-shadow: 3px 3px 5px 0px rgba(164, 164, 164, 1);
 	
 }

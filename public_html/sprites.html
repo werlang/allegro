@@ -6,22 +6,22 @@
 <title>Aprendendo Allegro 5 - Sprites</title>
 
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="script/popups.js"></script>
 <script src="script/buttons.js"></script>
+<script type="module" src="script/codeLoader.js"></script>
+<script type="module" src="script/side_menu_loader.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css"/>
 <link rel="stylesheet" href="css/popups.css"/>
 <link rel='stylesheet' href='css/responsive.css'/> 
 <link rel='stylesheet' href='css/buttons.css'/> 
-
 
 <style>
 	#mario { width: 128px; }
 </style>
 </head>
 <body>
-<?php include_once("functions.php"); ?>
-<?php include_once("side_menu.php"); ?>
+<!-- Side Menu Container -->
+<div id="side-menu-container"></div>
 
 <div class='page-wrapper'>
 	<div class="container">
@@ -60,7 +60,7 @@
 
 			<p>Para realizar a movimentação, precisamos a cada intervalo de tempo definido, mostrar um pedaço diferente da folha de sprites, e é essa a lógica que será explicada neste código:</p>
 					
-			<pre class='prettyprint linenums' id='codigo'><?php printfile('ccode/sprites.c'); ?></pre>
+			<pre class='prettyprint linenums' id='codigo' data-code-file='ccode/sprites.c'></pre>
 					
 			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/al_convert_mask_to_alpha'>al_convert_mask_to_alpha()</a></h2>
 			<p>Na <span class='linha' data-ln='56'>linha 56</span> carregamos a folha de sprites em <b>folha_sprite</b>, e na <span class='linha' data-ln='65'>linha 65</span> chamamos a função al_convert_mask_to_alpha() que recebe um bitmap e uma cor, e faz com que a cor passada por parâmetro seja considerada transparente dentro do bitmap. Isto faz com que a cor de fundo do arquivo (R:255, G:0, B:255) seja considerada como cor transparente. Caso o arquivo carregado já possua transparência (<a target='_blank' href='https://pt.wikipedia.org/wiki/Canal_alfa'>canal alpha</a>), como alguns arquivos .png por exemplo, você não precisará usar este comando.</p>
@@ -152,10 +152,11 @@
 			</ul>
 		</div>
 		<div id='btn-footer'>
-			<a class="button-red" href='teclado.php'>Anterior</a>
-			<a class="button-red" href='jogo.php'>Próximo</a>
+			<a class="button-red" href='teclado.html'>Anterior</a>
+			<a class="button-red" href='jogo.html'>Próximo</a>
 		</div>
 	</div>
 </div>
+
 </body>
-<script src="script/line_link.js"></script>
+</html>

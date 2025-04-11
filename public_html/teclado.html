@@ -6,9 +6,10 @@
 <title>Aprendendo Allegro 5 - Teclado</title>
 
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="script/popups.js"></script>
 <script src="script/buttons.js"></script>
+<script type="module" src="script/codeLoader.js"></script>
+<script type="module" src="script/side_menu_loader.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css"/>
 <link rel="stylesheet" href="css/popups.css"/>
 <link rel='stylesheet' href='css/responsive.css'/> 
@@ -16,8 +17,8 @@
 
 </head>
 <body>
-<?php include_once("functions.php"); ?>
-<?php include_once("side_menu.php"); ?>
+<!-- Side Menu Container -->
+<div id="side-menu-container"></div>
 
 <div class='page-wrapper'>
 	<div class="container">
@@ -33,7 +34,7 @@
 				<label>Setas para a cima, baixo, esquerda e direita sendo pressionadas</label>
 			</div>
 			
-			<pre class='prettyprint linenums' id='codigo'><?php printfile('ccode/teclado.c'); ?></pre>
+			<pre class='prettyprint linenums' id='codigo' data-code-file='ccode/teclado.c'></pre>
 					
 			<p>Na <span class='linha' data-ln='19'>linha 19</span> declaramos a função inicializar(). Esta função será utilizada lá dentro do main(), e ela retorna 0 caso alguma das diversas funções de inicialização do programa falhar, ou 1 caso chegue ao fim com sucesso. Na <span class='linha' data-ln='77'>linha 77</span> o main verifica as inicializações através desta função. Este processo foi feito por questões de organização de código.</p>
 			
@@ -77,10 +78,11 @@
 			</ul>
 		</div>
 		<div id='btn-footer'>
-			<a class="button-red" href='mouse.php'>Anterior</a>
-			<a class="button-red" href='timer.php'>Próximo</a>
+			<a class="button-red" href='mouse.html'>Anterior</a>
+			<a class="button-red" href='timer.html'>Próximo</a>
 		</div>
 	</div>
 </div>
+
 </body>
-<script src="script/line_link.js"></script>
+</html>

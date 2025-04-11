@@ -1,8 +1,10 @@
 services:
     web:
-        image: pswerlang/php-apache
+        image: nginx:alpine
         volumes:
-            - ./public_html:/var/www/html
+            - ./public_html:/usr/share/nginx/html
+        ports:
+            - "80:80"
         networks:
             - allegro
         restart: unless-stopped

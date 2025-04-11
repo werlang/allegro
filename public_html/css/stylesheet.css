@@ -85,12 +85,7 @@ a{
 	background-color: rgba(0, 0, 0, .7);
 	z-index: 2;
 	text-align: center;
-
-	-webkit-transition: opacity 0.5s;
-	-moz-transition: opacity 0.5s;
-	-ms-transition: opacity 0.5s;
-	-o-transition: opacity 0.5s;
-	-transition: opacity 0.5s;	
+	transition: opacity 0.5s;	
 }
 .fog-load img {
 	position: absolute;

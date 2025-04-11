@@ -6,9 +6,10 @@
 <title>Aprendendo Allegro 5 - Eventos</title>
 
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="script/popups.js"></script>
 <script src="script/buttons.js"></script>
+<script type="module" src="script/codeLoader.js"></script>
+<script type="module" src="script/side_menu_loader.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css"/>
 <link rel="stylesheet" href="css/popups.css"/>
 <link rel='stylesheet' href='css/responsive.css'/> 
@@ -16,8 +17,8 @@
 
 </head>
 <body>
-<?php include_once("functions.php"); ?>
-<?php include_once("side_menu.php"); ?>
+<!-- Side Menu Container -->
+<div id="side-menu-container"></div>
 
 <div class='page-wrapper'>
 	<div class="container">
@@ -32,7 +33,7 @@
 			
 			<p>No exemplo abaixo, iremos criar um evento que permite tratar o que acontece ao clicar no botão X que fecha a janela. Analisemos o código:</p>
 						
-			<pre class="prettyprint linenums" id='codigo'><?php printfile('ccode/eventos.c'); ?></pre>
+			<pre class="prettyprint linenums" id='codigo' data-code-file='ccode/eventos.c'></pre>
 			
 			<h2><a target='_blank' href='https://www.allegro.cc/manual/5/ALLEGRO_EVENT_QUEUE'>ALLEGRO_EVENT_QUEUE</a></h2>
 			<p>Na <span class='linha' data-ln='20'>linha 20</span> criamos a variável que será usada como a fila de eventos, explicada anteriormente. Toda vez que um evento for disparado, ele será guardado nesta fila. E toda vez que quisermos remover um evento da fila (para resolver ele), sempre será removido o evento que está aguardando a mais tempo, como numa fila de pessoas esperando por atendimento.</p>
@@ -70,11 +71,12 @@
 			</ul>
 		</div>
 		<div id='btn-footer'>
-			<a class="button-red" href='fontes.php'>Anterior</a>
-			<a class="button-red" href='mouse.php'>Próximo</a>
+			<a class="button-red" href='fontes.html'>Anterior</a>
+			<a class="button-red" href='mouse.html'>Próximo</a>
 		</div>
 	</div>
 	
 </div>
+
 </body>
-<script src="script/line_link.js"></script>
+</html>

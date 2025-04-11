@@ -6,13 +6,14 @@
 <title>Aprendendo Allegro 5 - Imagens</title>
 
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="script/popups.js"></script>
 <script src="script/buttons.js"></script>
+<script type="module" src="script/codeLoader.js"></script>
+<script type="module" src="script/side_menu_loader.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css"/>
 <link rel="stylesheet" href="css/popups.css"/>
 <link rel='stylesheet' href='css/responsive.css'/> 
-<link rel='stylesheet' href='css/buttons.css'/> 
+<link rel='stylesheet' href='css/buttons.css'/>
 
 <style>
 	img#hu3 { width: 200px; }
@@ -20,8 +21,8 @@
 </style>
 </head>
 <body>
-<?php include_once("functions.php"); ?>
-<?php include_once("side_menu.php"); ?>
+<!-- Side Menu Container -->
+<div id="side-menu-container"></div>
 
 <div class='page-wrapper'>
 	<div class="container">
@@ -33,7 +34,7 @@
 				
 				<p>Analise o exemplo:</p>
 							
-				<pre class="prettyprint linenums" id='codigo'><?php printfile('ccode/imagem.c'); ?></pre>
+				<pre class="prettyprint linenums" id='codigo' data-code-file='ccode/imagem.c'></pre>
 				
 				<p>Na <span class='linha' data-ln='5'>linha 5</span> fazemos o include do módulo allegro_image, que permite trabalhar com imagens tipo bmp e png.</p>
 				
@@ -90,12 +91,13 @@
 				</ul>
 			</div>
 			<div id='btn-footer'>
-				<a class="button-red" href='janela.php'>Anterior</a>
-				<a class="button-red" href='mensagem.php'>Próximo</a>
+				<a class="button-red" href='janela.html'>Anterior</a>
+				<a class="button-red" href='mensagem.html'>Próximo</a>
 			</div>
 		</div>
 	</div>
 	
 </div>
+
 </body>
-<script src="script/line_link.js"></script>
+</html>

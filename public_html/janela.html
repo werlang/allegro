@@ -6,18 +6,19 @@
 <title>Aprendendo Allegro 5 - Janela</title>
 
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="script/popups.js"></script>
 <script src="script/buttons.js"></script>
+<script type="module" src="script/codeLoader.js"></script>
+<script type="module" src="script/side_menu_loader.js"></script>
 <link rel="stylesheet" href="css/stylesheet.css"/>
 <link rel="stylesheet" href="css/popups.css"/>
 <link rel='stylesheet' href='css/responsive.css'/> 
-<link rel='stylesheet' href='css/buttons.css'/> 
+<link rel='stylesheet' href='css/buttons.css'/>
 
 </head>
 <body>
-<?php include_once("functions.php"); ?>
-<?php include_once("side_menu.php"); ?>
+<!-- Side Menu Container -->
+<div id="side-menu-container"></div>
 
 <div class='page-wrapper'>
 	<div class="container">
@@ -28,7 +29,7 @@
 			
 			<p>Vamos analisar abaixo um trecho de código. O detalhamento de seu funcionamento será explicado a seguir:</p>
 			
-				<pre class="prettyprint linenums" id='codigo'><?php printfile('ccode/tela.c'); ?></pre>
+			<pre class='prettyprint linenums' id='codigo' data-code-file='ccode/tela.c'></pre>
 			
 			<p>Na <span class='linha' data-ln='2'>linha 2</span> podemos ver o include na biblioteca principal do allegro. Nos próximos exemplos iremos fazer include em outras bibliotecas também. Isto se dá porque o allegro é dividido em diversas sub-bibliotecas, e dependendo dos módulos usados em cada programa, fazemos o include dos módulos necessários.</p>
 			
@@ -70,11 +71,12 @@
 			</ul>
 		</div>
 		<div id='btn-footer'>
-			<a class="button-red" href='index.php'>Anterior</a>
-			<a class="button-red" href='imagem.php'>Próximo</a>
+			<a class="button-red" href='index.html'>Anterior</a>
+			<a class="button-red" href='imagem.html'>Próximo</a>
 		</div>
 	</div>
 	
 </div>
+
 </body>
-<script src="script/line_link.js"></script>
+</html>
