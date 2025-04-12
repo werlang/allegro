@@ -1,0 +1,14 @@
+{
+    "name": "allegro",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "scripts": {
+        "start": "wrangler dev --ip 0.0.0.0"
+    },
+    "author": "Pablo Werlang",
+    "license": "MIT",
+    "dependencies": {
+        "wrangler": "^4.10.0"
+    }
+}

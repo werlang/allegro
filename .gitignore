@@ -1,2 +1,2 @@
-public_html/ccode/bunnyrun
-public_html/ccode/horda
+.wrangler
+node_modules

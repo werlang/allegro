@@ -1,14 +1,17 @@
 services:
-    web:
-        image: nginx:alpine
+    wrangler:
+        build:
+            context: .
+            dockerfile: Dockerfile-node
         volumes:
-            - ./public_html:/usr/share/nginx/html
-        ports:
-            - "80:80"
-        networks:
-            - allegro
+            - .:/app
+            - ./package.json:/app/package.json
+            - node_modules:/app/node_modules
         restart: unless-stopped
-
-networks:
-    allegro:
-        name: allegro
+        ports:
+            - 80:8787
+        command: npm start
+        # command: tail -f /dev/null #idle container
+volumes:
+    node_modules:
+        
